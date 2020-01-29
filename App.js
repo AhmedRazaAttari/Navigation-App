@@ -1,19 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, NavigationActions } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import LoadingScreen from './src/Screens/Screen/Loading';
+import HomeScreen from './src/Screens/Screen/Home';
+import Navigation from './src/navigation';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const StackNavigator = createStackNavigator({
+  LoadingScreen : {screen : LoadingScreen, navigationOptions : {
+    headerShown : false
+  }},
+  Drawer : Navigation,
+}, {
+  mode : "modal",
 });
+
+export default createAppContainer(StackNavigator);
