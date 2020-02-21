@@ -8,20 +8,26 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.6",
     "@react-native-community/masked-view": "0.1.5",
     "expo": "~36.0.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-bottom-sheet-behavior": "^2.0.0",
+    "react-native-chip-view": "0.0.12",
+    "react-native-foursquare-api": "0.0.4",
     "react-native-gesture-handler": "~1.5.0",
-    "react-native-reanimated": "~1.4.0",
+    "react-native-maps": "^0.26.1",
+    "react-native-reanimated": "^1.4.0",
     "react-native-safe-area-context": "0.6.0",
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.1.0",
     "react-navigation-drawer": "^2.3.3",
     "react-navigation-stack": "^2.0.16",
-    "react-navigation-tabs": "^2.7.0"
+    "react-navigation-tabs": "^2.7.0",
+    "rn-swipeable-panel": "^1.0.19"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

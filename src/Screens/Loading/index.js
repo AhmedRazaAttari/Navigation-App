@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
 import {View, Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import Logo from '../../../images/logo.png';
+import Logo from '../../images/logo.png';
 import {CustomButton} from '../../Component';
 
 export default class Loading extends Component{
+
+    NavigateToHome = () => {
+        this.props.navigation.push("Drawer")
+    }
+
     render(){
         return(
             <View style={styles.ViewDesign}>
                 <Image source={Logo} style={styles.LogoSize}/>
                 <Text style={styles.FontStyle}>Find the best way to your destination and enjoy the city</Text>
-                <CustomButton BackColor="green" Width={200} Height={50} BorderRadius={20} Value="Get Started" FontSize={19} FontColor="white"/>
+                <CustomButton BackColor="green" Width={200} Height={50} BorderRadius={20} Value="Get Started" FontSize={19} FontColor="white" BtnClick={this.NavigateToHome}/>
             </View>
         )
     }
