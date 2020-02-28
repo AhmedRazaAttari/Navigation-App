@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Image, TouchableHighlight, Text, Keyboard } from 'react-native';
+import { View, Dimensions, Image, TouchableHighlight, Text } from 'react-native';
 import MapView, {
     Marker,
     AnimatedRegion
@@ -14,8 +14,8 @@ const LONGITUDE = 67.0652013;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 import { SimpleLineIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-
-
+import {Data} from '../Component/globalFunctions.js'
+console.log("Data", Data)
 var mapStyle = [
     {
         "elementType": "geometry",
@@ -209,11 +209,10 @@ class Map extends Component {
 
     render() {
         return (
-            
             <MapView style={{ width: this.props.Width, height: this.props.Height }}
                 followsUserLocation
                 showsMyLocationButton={true}
-                showsUserLocation
+                // showsUserLocation
                 customMapStyle={mapStyle}
                 provider="google"
                 initialRegion={{
@@ -235,6 +234,20 @@ class Map extends Component {
                     </View>
 
                 </Marker>
+                {/* {Data.map((e, i) => {
+                    return <Marker
+                    // icon={}
+                    // pinColor="purple"
+                    coordinate={{
+                        latitude: e,
+                        longitude: e
+                    }}>
+                    <View style={{ elevation: 10 }}>
+                        <Image source={MarkerIcon} style={{ width: 30, height: 30, borderRadius: 100 }} />
+                    </View>
+
+                </Marker>
+                })} */}
             </MapView>
         )
     }

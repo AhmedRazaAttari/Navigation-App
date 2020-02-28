@@ -1,45 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TouchableHighlight, TextInput, Modal, Alert, Keyboard, ScrollView, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableHighlight, TextInput, Modal, Keyboard, ScrollView, FlatList, StyleSheet, Image } from 'react-native';
 import * as Location from 'expo-location';
-
+import { ListItem } from 'react-native-elements';
 import { MaterialIcons, MaterialCommunityIcons, FontAwesome, AntDesign, EvilIcons, Feather, Entypo } from '@expo/vector-icons';
 import { RNChipView } from 'react-native-chip-view'
 import Loading from '../images/3sqI.gif';
 
-// const DATA = [
-//     // {
-//     //     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-//     //     title: 'First Item',
-//     // },
-//     // {
-//     //     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-//     //     title: 'Second Item',
-//     // },
-//     // {
-//     //     id: '58694a0f-3da1-471f-bd96-145571e29d72',
-//     //     title: 'Third Item',
-//     // },
-// ];
-// var DATA = [];
-
-// function Item({ title }) {
-//     return (
-// <View style={{ width: '100%', marginTop: 10, justifyContent: "space-around", alignItems: "center", flexDirection: "row" }}>
-//     <View style={{ justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-//         <View style={{ height: 35, width: 35, backgroundColor: "#e1e8e3", borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
-//             <EvilIcons name="location" size={28} color="black" />
-//         </View>
-//         <Text>510 m</Text>
-//     </View>
-//     <View style={{ flexDirection: "column", width: "60%" }}>
-//         <Text>{title}</Text>
-//         <Text>Karachi, Pakistan</Text>
-//     </View>
-//     <Feather name="arrow-up-left" size={28} color="black" />
-//     {/* <Text style={{ fontSize: 20}}>{title}</Text> */}
-// </View>
-//     );
-// }
 
 var SearchedData = [];
 class CustomButton extends Component {
@@ -121,14 +87,14 @@ class SearchBar extends Component {
         Keyboard.dismiss();
     }
 
-    async componentDidMount() {
+    // async componentDidMount() {
 
-        Location.watchPositionAsync({ timeInterval: 7000, distanceInterval: 0.1 }, loc => {
-            // console.log('watching***', loc);
-            this.setState({ marker_long: loc.coords.longitude, marker_lat: loc.coords.latitude })
-        })
+    //     // Location.watchPositionAsync({ timeInterval: 7000, distanceInterval: 0.1 }, loc => {
+    //     //     // console.log('watching***', loc);
+    //     //     this.setState({ marker_long: loc.coords.longitude, marker_lat: loc.coords.latitude })
+    //     // })
 
-    }
+    // }
 
     async SearchLocation(e) {
         console.log(e)
@@ -187,87 +153,8 @@ class SearchBar extends Component {
                             <MaterialIcons name="keyboard-voice" size={26} color="black" />
                         </TouchableHighlight>}
                 </View>
-
-                <ScrollView>
-                    {this.state.dataFetched ? SearchedData.map((item, index) => {
-                        if (item.LocationObj.distance > 1000) {
-                            var distance = parseInt(item.LocationObj.distance / 1000) + " " + "Km";
-                        }
-                        else {
-                            var distance = item.LocationObj.distance + " " + "m";
-                        }
-
-                        console.log("ITEMS FROM MAP ==>", item.LocationObj);
-                        if (item.LocationObj.address) {
-                            if (item.LocationObj.crossStreet) {
-                                return <TouchableHighlight onPress={console.log(item.nameOfPlace)} key={index}>
-                                    <View style={{ width: '100%', marginTop: 10, justifyContent: "space-around", alignItems: "center", flexDirection: "row" }}>
-                                        <View style={{ justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                                            <View style={{ height: 35, width: 35, backgroundColor: "#e1e8e3", borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
-                                                <EvilIcons name="location" size={28} color="black" />
-                                            </View>
-                                            <Text>{distance}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: "column", width: "60%" }}>
-                                            <Text style={{ fontWeight: "bold" }}>{item.nameOfPlace}</Text>
-                                            <Text>{item.LocationObj.address + " " + item.LocationObj.crossStreet + " " + item.LocationObj.city}</Text>
-                                        </View>
-                                        <Feather name="arrow-up-left" size={28} color="black" />
-                                    </View>
-                                </TouchableHighlight>
-                            }
-                            else {
-                                return <TouchableHighlight onPress={console.log(item.nameOfPlace)} key={index}>
-                                    <View style={{ width: '100%', marginTop: 10, justifyContent: "space-around", alignItems: "center", flexDirection: "row" }}>
-                                        <View style={{ justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                                            <View style={{ height: 35, width: 35, backgroundColor: "#e1e8e3", borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
-                                                <EvilIcons name="location" size={28} color="black" />
-                                            </View>
-                                            <Text>{distance}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: "column", width: "60%" }}>
-                                            <Text style={{ fontWeight: "bold" }}>{item.nameOfPlace}</Text>
-                                            <Text>{item.LocationObj.address + " " + item.LocationObj.city}</Text>
-                                        </View>
-                                        <Feather name="arrow-up-left" size={28} color="black" />
-                                    </View>
-                                </TouchableHighlight>
-                            }
-                        }
-                        else {
-                            return <TouchableHighlight onPress={console.log(item.nameOfPlace)} key={index}>
-                                <View style={{ width: '100%', marginTop: 10, justifyContent: "space-around", alignItems: "center", flexDirection: "row" }}>
-                                    <View style={{ justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                                        <View style={{ height: 35, width: 35, backgroundColor: "#e1e8e3", borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
-                                            <EvilIcons name="location" size={28} color="black" />
-                                        </View>
-                                        <Text>{distance}</Text>
-                                    </View>
-                                    <View style={{ flexDirection: "column", width: "60%" }}>
-                                        <Text style={{ fontWeight: "bold" }}>{item.nameOfPlace}</Text>
-                                        <Text>{item.LocationObj.city}</Text>
-                                    </View>
-                                    <Feather name="arrow-up-left" size={28} color="black" />
-                                </View>
-                            </TouchableHighlight>
-                        }
-                    }) : <View style={{ padding: 15, marginTop: 15 }}>
-                            <Text style={{ fontSize: 18, fontWeight: "bold" }}>Tired of typing?</Text>
-                            <Text style={{ color: "#525457", fontSize: 16, marginTop: 8 }}>Sign in to get suggestions from your search history and Google Contacts.</Text>
-                            <TouchableOpacity>
-                                <View style={{ padding: 8, width: 220, marginTop: 20, borderRadius: 30, flexDirection: "row", justifyContent: "space-around", borderWidth: 1, borderColor: "black" }}>
-                                    <FontAwesome name="user-circle-o" size={21} color="blue" />
-                                    <Text>Sign in to save searches</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    }
-                </ScrollView>
-                {/* <FlatList
-                    data={DATA}
-                    renderItem={({ item }) => <Item title={item.title} />}
-                    keyExtractor={item => item.id}
-                /> */}
+                
+               
             </View>
         </Modal>
     }
@@ -292,12 +179,8 @@ class SearchBar extends Component {
     }
 
     render() {
-        console.log("SEARCHED DATA ARRAY ==>", SearchedData)
         return (
             !this.state.SearchBarActive ? this.SearchBarView() : this.Show_Modal()
-            // <View>
-            //     {this.state.SearchBarActive && this.Show_Modal()}
-            // </View>
         )
     }
 }
@@ -307,5 +190,20 @@ export {
     CustomButton,
     SearchBar,
     Chips,
-    // ScrollableModal
 }
+
+var styles = StyleSheet.create({
+    subtitleView: {
+        flexDirection: 'row',
+        paddingLeft: 10,
+        paddingTop: 5
+    },
+    ratingImage: {
+        height: 19.21,
+        width: 100
+    },
+    ratingText: {
+        paddingLeft: 10,
+        color: 'grey'
+    }
+})
